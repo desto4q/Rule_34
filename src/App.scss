@@ -7,11 +7,13 @@
 $main: #1D1D1D;
 $bg: #242424;
 $active: #0696DD;
+$white: transparentize($color: white, $amount: .5);
 
 .hamburger {
     overflow: hidden;
     // background-color: red;
     // transform: scaleX(-1);
+    
 }
 body {
     background-color: $bg;
@@ -28,6 +30,7 @@ body {
         height: 100vh;
         background-color: $main;
         // padding: 8px 8px;
+        z-index: 10;
     }
     .navContent {
         position: absolute;
@@ -67,16 +70,81 @@ body {
             padding: 0px 16px;
             display: flex;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
             .logo {
                 color: white;
                 font-family: "courgette";
                 font-size: 32px;
             }
+            .search_box {
+                display: flex;
+                align-items: center;
+                margin-left: auto;
+                width: fit-content;
+                gap: 2px;
+                .params {
+                   font-size: 12px;
+                    margin: 0 4px;
+                    font-size: 12px;
+                    background-color: $bg;
+                    color: $active;                    
+                }
+                flex-wrap: wrap;
+                
+            }
+            .search {
+                display: flex;
+                gap: 4px;
+                position: relative;
+                width: 100%;
+                input {
+                    outline: none;
+                    border: none;
+                    padding: 4px;
+                    background-color: $bg;
+                    color: white;
+                    width: 100%;
+                    min-width: 200px;
+                }
+                .tags {
+                    color: $active;
+                    background-color: $bg;
+                    padding: 4px;
+                    font-size: 12px;
+                }
+                .search_list {
+                    position: absolute;
+                    transform: translateY(10%) translateX(-2%);
+                    background-color: $main;
+                    display: flex;
+                    flex-direction: column-reverse;
+                    padding: 4px;
+                    width: max-content;
+                    div {
+                        color: transparentize($color: $active, $amount: 0.6);
+                        border-top: 1px solid transparentize($color: white, $amount: .8);
+                        padding: 4px 0;
+                        cursor: pointer;
+                        font-size: 14px;
+                        display: flex;
+                        align-items: center;
+                        
+                    }
+                    div:hover{
+                        background-color:  $bg;
+                        color: $active;
+                    }
+                }
+            }
         }
     }
 }
 
-
+.vid {
+    outline: 4px solid $active;
+}
 .card {
     display: flex;
     align-items: center;
@@ -84,8 +152,6 @@ body {
     width: 200px;
     margin-bottom: 20px;
     position: relative;
-    padding: 8px;
-    background-color: red;
     .info {
         position: absolute;
         top: 0;
@@ -94,7 +160,87 @@ body {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        filter: blur(5px);
+        filter:  blur(2px);
     }
 }
 
+.masonry {
+    display: grid;
+    place-items: center;
+}
+
+.postId {
+    width: 100%;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    video,img {
+        width: 100%;
+        height: 100%;
+        width: -moz-max-content;
+        width: -webkit-max-content;
+    }
+    .videoCont {
+        background-color: $white !important;
+        width: 100%;
+        height: 100%;
+        
+        max-width: 800px;
+        padding: 1px;
+        video {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    img {
+        max-height: calc(100vh - 40px);
+        object-fit: contain;
+    }
+    .info {
+        margin-top: 48px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        .left {
+             color: $white;
+        }
+        h3 {
+            display: flex;
+            gap: 4px;
+            color: $active;
+        }
+        div {
+            display: flex;
+            gap: 4px;
+            color: transparentize($color: $active, $amount: 0.4);
+        }
+        .artist {
+            font-size: 24px;
+        }
+        .download {
+            background-color: $main;
+            width: fit-content;
+            padding: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            outline: 1px solid $white;
+        }
+
+        .source{
+            color: $white;
+            font-size: 18px;
+            height: fit-content;
+            display: flex;
+            align-items: center;
+            width: fit-content;
+            gap: 8px;
+            
+            img {
+                height: 16px;
+                filter: invert(41%) sepia(96%) saturate(3625%) hue-rotate(177deg) brightness(103%) contrast(95%);
+            }
+        }
+    }
+}
